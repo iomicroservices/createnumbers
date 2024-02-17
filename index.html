@@ -100,6 +100,19 @@
 
 <body>
 
+
+<!-- Component Functions -->
+<script>
+	// Load header template
+	fetch('/components/header.html')
+	  .then(response => response.text())
+	  .then(html => document.getElementById('nav-bar').innerHTML = html);
+	// Load footer template
+	fetch('/components/footer.html')
+	  .then(response => response.text())
+	  .then(html => document.getElementById('footer').innerHTML = html);
+</script>
+
 <!-- Pre loader START -->
 <div class="preloader">
 	<div class="preloader-item">
@@ -891,18 +904,6 @@ Footer END -->
 
 <!-- Theme Functions -->
 <script src="assets/js/functions.js"></script>
-
-<!-- Component Functions -->
-<script>
-	// Load header template
-	fetch('/components/header.html')
-	  .then(response => response.text())
-	  .then(html => document.getElementById('nav-bar').innerHTML = html);
-	// Load footer template
-	fetch('/components/footer.html')
-	  .then(response => response.text())
-	  .then(html => document.getElementById('footer').innerHTML = html);
-</script>
 
 </body>
 </html>
