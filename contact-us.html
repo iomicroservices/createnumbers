@@ -34,11 +34,19 @@
 		{
 		  "@context": "http://schema.org",
 		  "@type": "ContactPage",
-		  "name": "Contact Us",
+		  "name": "Contact Us | createnumbers.com",
 		  "url": "https://www.createnumbers.com/contact-us",
 		  "description": "Get in touch with Create Numbers for inquiries, support, or feedback. Create your own custom mobile number today!",
 		  "provider": {
 			"@type": "Organization",
+			"image": "https://www.createnumbers.com/assets/images/logo-icon.jpg",
+			"url": "https://www.createnumbers.com",
+			"logo": "https://www.createnumbers.com/assets/images/logo-icon.jpg",
+			"description": "Customise your own UK mobile number with our unique service. Choose from millions of available numbers to find the perfect fit for your personal or business needs. Get in touch today to find out more.",
+			"foundingDate": "2022-07-05T03:17:22.000Z",
+			"email": "info@createnumbers.com",
+			"telephone": "+447999999553",
+			"legalName": "Create Numbers Ltd",
 			"name": "Create Numbers",
 			"address": {
 			  "@type": "PostalAddress",
@@ -47,16 +55,48 @@
 			  "postalCode": "NW9 0NW",
 			  "addressCountry": "United Kingdom"
 			},
-			"contactPoint": {
-			  "@type": "ContactPoint",
-			  "telephone": "+447999999553",
-			  "contactType": "customer support",
-			  "areaServed": "GB",
-			  "availableLanguage": ["English", "Arabic"]
-			}
+			"numberOfEmployees": {
+				"@type": "QuantitativeValue",
+				"minValue": 1,
+				"maxValue": 9
+			},
+			"contactPoint": [
+			  {
+				"@type": "ContactPoint",
+				"contactType": "customer support",
+				"telephone": "+447999999553",
+				"areaServed": "GB",
+				"availableLanguage": ["English", "Arabic"]
+			  },
+			  {
+				"@type": "ContactPoint",
+				"contactType": "sales",
+				"telephone": "+447999999553",
+				"email": "info@createnumbers.com",
+				"availableLanguage": ["English", "Arabic"]
+			  }
+			],
+			"openingHoursSpecification": [
+			  {
+				"@type": "OpeningHoursSpecification",
+				"dayOfWeek": [
+				  "Monday",
+				  "Tuesday",
+				  "Wednesday",
+				  "Thursday",
+				  "Friday"
+				],
+				"opens": "09:00",
+				"closes": "17:00"
+			  }
+			],
+			"sameAs": [
+			  "https://www.facebook.com/people/Create-Numbers/100067590341398/",
+			  "https://www.instagram.com/createnumbers/"
+			]
 		  }
 		}
-		</script>
+	</script>
 		
 
 	<!-- Dark mode -->
@@ -195,7 +235,7 @@ Main hero START -->
 								<a href="https://www.instagram.com/createnumbers/" class="btn btn-icon btn-light text-instagram rounded-circle"><i class="bi bi-instagram"></i></a>
 							</li>
 							<li class="list-inline-item">
-								<a href="#" class="btn btn-icon btn-light text-whatsapp rounded-circle"><i class="bi bi-whatsapp"></i></a>
+								<a href="https://wa.me/+447999999553" class="btn btn-icon btn-light text-whatsapp rounded-circle"><i class="bi bi-whatsapp"></i></a>
 							</li>
 						</ul>
 					</div>
@@ -276,7 +316,7 @@ Main hero START -->
 						</div>
 
 						<div class="col-md-6">
-							<label class="form-label heading-color">Company *</label>
+							<label class="form-label heading-color">Company</label>
 							<input type="text" class="form-control form-control-lg" placeholder="Company name">
 						</div>
 
