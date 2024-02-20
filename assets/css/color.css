@@ -1,4 +1,3 @@
-
 /* Update below HEX and RGB color code to your primary color for light mode */
 [data-bs-theme=light] {
   --bs-primary: #5c3efb !important;
