@@ -1,13 +1,13 @@
 
 /* Update below HEX and RGB color code to your primary color for light mode */
 [data-bs-theme=light] {
-  --bs-primary: #f7c32e !important;
-  --bs-primary-rgb: 247, 195, 46 !important; 
-  --bs-link-color: #f7c32e !important;
+  --bs-primary: #5c3efb !important;
+  --bs-primary-rgb: 92, 62, 251 !important; 
+  --bs-link-color: #5c3efb !important;
   --bs-link-hover-color: #5c3efb !important;
-  --bs-link-color-rgb:247, 195, 46 !important;
+  --bs-link-color-rgb:92, 62, 251 !important;
   --bs-link-hover-color-rgb: 92, 62, 251;
-  --bs-nav-pills-link-active-bg: #f7c32e !important;
+  --bs-nav-pills-link-active-bg: #5c3efb !important;
 }
 
 /* Update below HEX and RGB color code to your primary color for dark mode */
