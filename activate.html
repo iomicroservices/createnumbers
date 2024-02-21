@@ -113,6 +113,14 @@
 
 <body>
 
+<!-- Component Functions -->
+<script>
+	// Load footer template
+	fetch('/components/footer.html')
+		.then(response => response.text())
+		.then(html => document.getElementById('footer').innerHTML = html);
+</script>
+
 <!-- Pre loader START -->
 <div class="preloader">
 	<div class="preloader-item">
@@ -124,8 +132,37 @@
 <!-- Header START -->
 <header class="header-sticky header-absolute">
 	<!-- nav bar ----------------------------------------------->
-	<nav id="nav-bar"></nav>
-	<script src="/components/header.html"></script>
+	<nav id="nav-bar" class="navbar navbar-expand-xl">
+		<div class="container">
+			<!-- Logo START -->
+			<a class="navbar-brand me-0" href="index.html">
+				<img class="light-mode-item navbar-brand-item" src="/assets/images/logo.svg" alt="logo">
+				<img class="dark-mode-item navbar-brand-item" src="/assets/images/logo-light.svg" alt="logo">
+			</a>
+			<!-- Logo END -->
+	
+			<!-- Buttons -->
+			<ul class="nav align-items-center dropdown-hover ms-sm-2">
+
+				<!-- Start now button -->
+				<li class="nav-item d-none d-sm-block">
+					<a href="#activationForm" class="btn btn-sm btn-warning mb-0" role="button">Activate SIM</a>
+				</li>
+				<!-- Responsive navbar toggler -->
+				<li class="nav-item">
+					<button class="navbar-toggler ms-sm-3 p-2" type="button" data-bs-toggle="collapse"
+						data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false"
+						aria-label="Toggle navigation">
+						<span class="navbar-toggler-animation">
+							<span></span>
+							<span></span>
+							<span></span>
+						</span>
+					</button>
+				</li>
+			</ul>
+		</div>
+	</nav>
 </header>
 <!-- Header END -->
 
@@ -164,38 +201,44 @@ Main Banner START -->
 Main Banner END -->
 
 <!-- =======================
-Quote & video START -->
-<section class="pt-4 mt-n8">
-		<div class="container">
-			<div class="row">
-				<!-- Quote -->
-				<div class="col-lg-4">
-					<div class="card card-body bg-primary overflow-hidden">
-						<img src="assets/images/custom/activate-sim.png">
-					</div>
+Activation & form START -->
+<section id="activationForm" class="pt-4 pb-0 mt-n8">
+	<div class="container">
+		<div class="row">
+			<!-- Quote -->
+			<div class="col-lg-4">
+				<div class="card card-body overflow-hidden bg-primary">
+					<img src="assets/images/custom/activate-sim.png">
 				</div>
+			</div>
 
-				<!-- Video -->
-				<div class="col-lg-8 position-relative ms-auto ps-xl-6 mt-6">
-					<!-- Card -->
-					<div class="card card-body overflow-hidden p-0">
-						<img src="assets/images/about/13.jpg" class="card-img" alt="video-img">
-						<div class="bg-overlay bg-dark opacity-3"></div>
-						<div class="card-img-overlay d-flex p-3">
-							<!-- Video button and link -->
-							<div class="m-auto">
-								<a href="https://www.youtube.com/embed/tXHviS-4ygo" class="btn btn-lg btn-white btn-round stretched-link mb-0" data-glightbox="" data-gallery="course-video">
-									<i class="fas fa-play"></i>
-								</a>
-							</div>
+			<!-- Activation form -->
+			<div class="col-lg-8 position-relative ms-auto ps-xl-6 mt-6">
+				<!-- Card -->
+				<div class="card card-body shadow border p-sm-5">
+			
+					<form class="row g-4">
+						<div class="col-md-6">
+							<label class="form-label heading-color">Activation code *</label>
+							<input type="text" class="form-control form-control-lg" placeholder="On your giffgaff SIM">
 						</div>
-					</div>
+			
+						<div class="col-md-6">
+							<label class="form-label heading-color">Email address *</label>
+							<input type="email" class="form-control form-control-lg" id="floatingInput"
+								placeholder="Must be your order email">
+						</div>				
+						<!-- Button -->
+						<button class="btn btn-lg btn-warning mb-0">Submit</button>
+					</form>
+
 				</div>
-			</div> <!-- Row END -->
-		</div>
+			</div>
+		</div> <!-- Row END -->
+	</div>
 </section>
 <!-- =======================
-Quote & video END -->
+Activation & form END -->
 
 </main>
 <!-- **************** MAIN CONTENT END **************** -->
@@ -220,21 +263,6 @@ Footer END -->
 
 <!-- Theme Functions -->
 <script src="/assets/js/functions.js"></script>
-
-<!-- Component Functions -->
-<script>
-	// Load header template
-	fetch('/components/header.html')
-		.then(response => response.text())
-		.then(html => document.getElementById('nav-bar').innerHTML = html);
-	// Load footer template
-	fetch('/components/footer.html')
-		.then(response => response.text())
-		.then(html => document.getElementById('footer').innerHTML = html);
-</script>
-
-
-
 
 </body>
 </html>

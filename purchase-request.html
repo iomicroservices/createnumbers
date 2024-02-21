@@ -89,7 +89,19 @@
 
 <body>
 
-	<!-- Header START -->
+<!-- Component Functions -->
+<script>
+	// Load header template
+	fetch('/components/header.html')
+		.then(response => response.text())
+		.then(html => document.getElementById('nav-bar').innerHTML = html);
+	// Load footer template
+	fetch('/components/footer.html')
+		.then(response => response.text())
+		.then(html => document.getElementById('footer').innerHTML = html);
+</script>
+
+<!-- Header START -->
 <header class="header-sticky">
 	<!-- Logo Nav START -->
 	<nav class="navbar navbar-expand-xl">
