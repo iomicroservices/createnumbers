@@ -13,10 +13,10 @@
 [data-bs-theme=dark] {
   --bs-primary: #5c3efb !important;
   --bs-primary-rgb: 92, 62, 251 !important; 
-  --bs-link-color:#5c3efb !important;
-  --bs-link-hover-color:#f7c32e !important;
+  --bs-link-color: #5c3efb !important;
+  --bs-link-hover-color: #5c3efb !important;
   --bs-link-color-rgb:92, 62, 251 !important;
-  --bs-link-hover-color-rgb: 247, 195, 46;
+  --bs-link-hover-color-rgb: 92, 62, 251;
   --bs-nav-pills-link-active-bg: #5c3efb !important;
 
   /* --bs-primary: #f0ac19 !important;
