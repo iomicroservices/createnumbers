@@ -19941,7 +19941,7 @@ small,
   -webkit-transition: all 0.3s ease-in-out;
   transition: all 0.3s ease-in-out;
   background: var(--bs-primary);
-  color: #fff;
+  color: #000;
   border-radius: 10%;
   width: 52px;
   height: 52px;
@@ -19960,7 +19960,7 @@ small,
 }
 .back-top:hover {
   background: var(--bs-link-hover-color);
-  color: #fff;
+  color: #000;
 }
 .back-top.back-top-show {
   visibility: visible;

@@ -190,10 +190,6 @@
 	fetch('/components/header.html')
 	  .then(response => response.text())
 	  .then(html => document.getElementById('nav-bar').innerHTML = html);
-	// Load footer template
-	fetch('/components/footer.html')
-	  .then(response => response.text())
-	  .then(html => document.getElementById('footer').innerHTML = html);
 	// Load faqs template
 	fetch('/components/faqs.html')
 	  .then(response => response.text())
@@ -359,7 +355,7 @@ Main Banner END -->
 
 <!-- =======================
 Request form START -->
-<section id="requestForm" class="pt-7 pt-md-8">
+<section id="requestForm" class="pt-8 pb-0">
 	<div class="container pt-4 pt-md-0">
 		<div class="row justify-content-between">
 
@@ -433,7 +429,7 @@ Request form END -->
 
 <!-- =======================
 Pricing START -->
-<section id="pricing" class="pb-0">
+<section id="pricing" class="pt-8 pb-0">
 	<div class="container">
 		<!-- Title -->
 		<div class="inner-container text-center mb-4 mb-sm-6">
@@ -509,7 +505,7 @@ Pricing START -->
 
 			<!-- Custom plan -->
 			<div class="col-lg-4 ms-auto mt-4 mt-lg-0">
-				<div class="card bg-dark rounded h-100 overflow-hidden p-4">
+				<div class="card rounded h-100 overflow-hidden p-4" style="background-color:#5c3efb">
 					<!-- SVG decoration -->
 					<div class="position-absolute top-0 end-0 mt-n3 me-n4">
 						<img src="assets/images/elements/decoration-pattern-2.svg" class="opacity-2 h-200px" alt="">
@@ -541,7 +537,7 @@ Pricing END -->
 
 <!-- =======================
 How it works START -->
-<section id="process" class="pb-0 overflow-hidden">
+<section id="process" class="pt-8 pb-0 overflow-hidden">
 	<div class="container">
 		<!-- Title -->
 		<div class="inner-container text-center mb-4 mb-sm-6">
@@ -700,14 +696,14 @@ How it works END -->
 
 <!-- =======================
 FAQs START -->
-<section id="faqs"></section>
+<section id="faqs" class="pt-8 pb-0"></section>
 <script src="/components/faqs.html"></script>
 <!-- =======================
 FAQs END -->
 
 <!-- =======================
 Contact us START -->
-<section id="contact" class="pt-0">
+<section id="contact" class="pt-8 pb-0">
 	<div class="container">
 		<div class="bg-primary bg-opacity-10 rounded p-4 p-sm-5">
 
@@ -750,7 +746,7 @@ Contact us END -->
 
 <!-- =======================
 Feedback START -->
-<section id="feedback">
+<section id="feedback"  class="pt-8 pb-0">
 	<div class="container">
 		<div class="row">
 			<!-- Testimonials content -->
@@ -932,7 +928,7 @@ Feedback END -->
 
 <!-- =======================
 Blogs START -->
-<section id="blogSlider" class="pt-0">
+<section id="blogSlider" class="pt-8 pb-0">
 	<div class="container">
 		<div class="row">
 			<div class="col-lg-8 col-xl-4 text-center text-xl-start mx-auto">
@@ -1081,10 +1077,9 @@ Blogs START -->
 <!-- =======================
 Blogs END -->
 
-
 <!-- =======================
 About us START -->
-<section id="about" class="pt-0">
+<section id="about" class="pt-8 pb-0">
 	<div class="container">
 		<div class="row g-4 align-items-center">
 			<!-- Features -->
@@ -1197,7 +1192,7 @@ About us END -->
 
 <!-- =======================
 Features START -->
-<section id="features" class="pb-0">
+<section id="features" class="pt-8 pb-0">
 	<div class="container">
 		<!-- Title -->
 		<div class="inner-container-small text-center mb-9">
@@ -1381,8 +1376,142 @@ Features END -->
 
 <!-- =======================
 Footer START -->
-    <footer id="footer"></footer>
-    <script src="/components/footer.html"></script>
+	<footer id="footer" class="pt-6">
+		<div class="container position-relative mt-sm-5">
+	
+			<!-- CTA -->
+			<div class="row g-3 g-md-4 align-items-center">
+				<div class="col-md-6">
+					<h2 class="mb-0 lh-base">What are you waiting for?
+						<span class="position-relative z-index-1">Create
+							<!-- SVG START -->
+							<span
+								class="position-absolute top-50 start-50 translate-middle z-index-n1 ms-n2 d-none d-lg-block">
+								<svg width="188" height="53" viewBox="0 0 188 53" fill="none"
+									xmlns="http://www.w3.org/2000/svg">
+									<path class="fill-primary"
+										d="M3.50843 26.6791C5.35764 34.7553 19.176 38.9851 26.7629 41.4254C47.5981 47.4215 69.586 48.7695 91.2825 49.6062C107.583 50.0478 123.91 49.7573 140.135 48.1885C154.13 46.7243 169.469 45.5158 180.691 36.9051C185.618 33.0239 185.82 27.2834 181.324 22.9954C169.418 11.8166 138.589 7.57514 121.756 4.98378C103.226 2.36919 84.4557 3.171 65.8116 4.27494C77.9834 4.49573 90.1553 5.19295 102.238 6.57578C107.406 7.27301 112.802 8.35371 117.032 11.3053C113.093 10.457 109.015 10.4338 105 10.1084C76.8182 7.19166 47.1675 4.62355 19.9233 13.5713C13.9704 15.8256 2.97647 19.5442 3.50843 26.6791ZM0 25.7727C1.06393 10.1897 39.758 5.03027 53.3231 4.43763C51.1192 4.29818 48.9154 4.07739 46.7242 3.78688C50.3846 2.79915 54.121 2.04382 57.9081 1.60224C65.5583 0.939879 73.2464 0.753952 80.9092 0.323997C94.0944 -0.349987 107.305 0.0102456 120.414 1.56738C136.816 4.10063 197.384 11.3983 186.757 34.918C184.554 38.8573 180.399 41.4603 176.27 43.5403C166.163 48.6068 154.523 49.8618 143.263 51.1285C126.456 52.7902 109.559 53.3131 92.6631 52.825C67.7368 51.907 42.1772 50.501 18.6947 42.1459C11.1586 39.1943 0.126658 34.3834 0 25.7727Z" />
+								</svg>
+							</span>
+							<!-- SVG END -->
+						</span>
+						your number now!
+					</h2>
+				</div>
+	
+				<!-- Button -->
+				<div class="col-md-5 text-md-end ms-auto">
+					<a class="btn btn-lg btn-primary-soft icon-link icon-link-hover mb-0" href="#">Start Your Journey<i
+							class="bi bi-arrow-right"></i> </a>
+				</div>
+			</div>
+	
+			<!-- Divider -->
+			<hr class="my-5">
+	
+			<!-- Footer Widgets -->
+			<div class="row g-4 justify-content-between">
+	
+				<!-- Widget 1 START -->
+				<div class="col-lg-8 col-xl-7">
+					<div class="row g-4">
+						<!-- Link block -->
+						<div class="col-6 col-md-3">
+							<h6 class="mb-2 mb-md-4">Quick links</h6>
+							<ul class="nav flex-column">
+								<li class="nav-item"><a class="nav-link pt-0" href="about-us.html">About us</a></li>
+								<li class="nav-item"><a class="nav-link" href="contact-us.html">Contact us</a></li>
+								<li class="nav-item"><a class="nav-link" href="contact-v1.html">Become a partner</a></li>
+								<li class="nav-item"><a class="nav-link" href="sign-in.html">Sign in</a></li>
+								<li class="nav-item"><a class="nav-link" href="sign-up.html">Sign up</a></li>
+							</ul>
+						</div>
+	
+						<!-- Link block -->
+						<div class="col-6 col-md-3">
+							<h6 class="mb-2 mb-md-4">Community</h6>
+							<ul class="nav flex-column">
+								<li class="nav-item"><a class="nav-link pt-0" href="#">Documents</a></li>
+								<li class="nav-item"><a class="nav-link" href="#">Supports <i
+											class="bi bi-box-arrow-up-right small ms-1"></i></a></li>
+								<li class="nav-item"><a class="nav-link" href="/faqs.html">FAQs</a></li>
+								<li class="nav-item"><a class="nav-link" href="/blog-grid.html">The blog</a></li>
+								<li class="nav-item"><a class="nav-link" href="/privacy-policy.html">Privacy Policy</a></li>
+								<li class="nav-item"><a class="nav-link" href="/terms-of-service.html">Terms of Service</a>
+								</li>
+							</ul>
+						</div>
+	
+						<!-- Link block -->
+						<div class="col-md-6">
+							<h6 class="mb-2 mb-md-4">Contact details</h6>
+							<ul class="list-group list-group-borderless">
+								<li class="d-flex mb-3"><i class="me-2 text-primary bi bi-geo-alt"></i> 32 Airco Close,
+									London, NW9 0NW </li>
+								<li class="d-flex mb-3"><i class="me-2 text-primary bi bi-headset"></i> +447999 999 553
+								</li>
+								<li class="d-flex mb-3"><i class="me-2 text-primary bi bi-envelope"></i>
+									info@createnumbers.com</li>
+								<li class="d-flex mb-3"><i class="me-2 text-primary bi bi-clock"></i>
+									<p class="mb-0">Mon - Fri: <strong>09:00 - 17:00</strong> <br>Sat - Sun:
+										<strong>Closed</strong></p>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+				<!-- Widget 1 END -->
+	
+				<!-- Widget 2 START -->
+				<div class="col-lg-3">
+					<h6 class="mb-2 mb-md-4">App available on</h6>
+					<div class="row g-2 mb-4 mb-sm-5">
+						<!-- Google play store button -->
+						<div class="col-6 col-sm-4 col-md-3 col-lg-6">
+							<a href="#"> <img src="assets/images/elements/google-play.svg" alt=""> </a>
+						</div>
+						<!-- App store button -->
+						<div class="col-6 col-sm-4 col-md-3 col-lg-6">
+							<a href="#"> <img src="assets/images/elements/app-store.svg" alt="app-store"> </a>
+						</div>
+					</div>
+	
+					<!-- Social buttons -->
+					<h6 class="mb-2 mb-md-4">Follow on</h6>
+	
+					<ul class="list-inline mb-0 mt-3">
+						<li class="list-inline-item"> <a class="btn btn-xs btn-icon bg-facebook"
+								href="https://www.facebook.com/people/Create-Numbers/100067590341398/"><i
+									class="fab fa-fw fa-facebook-f lh-base"></i></a> </li>
+						<li class="list-inline-item"> <a class="btn btn-xs btn-icon bg-instagram"
+								href="https://www.instagram.com/createnumbers/"><i
+									class="fab fa-fw fa-instagram lh-base"></i></a> </li>
+					</ul>
+				</div>
+				<!-- Widget 2 END -->
+			</div>
+	
+			<!-- Divider -->
+			<hr class="mt-4 mb-3">
+	
+			<!-- Bottom footer -->
+			<div class="d-md-flex justify-content-between align-items-center text-center text-lg-start py-3">
+				<!-- Logo -->
+				<a class="navbar-brand" href="index.html">
+					<img class="light-mode-item navbar-brand-item h-40px" src="assets/images/logo.svg" alt="logo">
+					<img class="dark-mode-item navbar-brand-item h-40px" src="assets/images/logo-light.svg" alt="logo">
+				</a>
+	
+				<!-- Copyright link-->
+				<div class="text-body mt-3 mt-md-0">
+					Copyrights ©2024 Create Numbers Ltd. Registered in England & Wales company number
+					<a href="https://find-and-update.company-information.service.gov.uk/company/14217243"
+						class="text-body text-primary-hover" rel="nofollow" target="_blank">14217243</a>
+				</div>
+				<!-- Copyright link-->
+			</div>
+		</div>
+	</footer>
 <!-- =======================
 Footer END -->
 
