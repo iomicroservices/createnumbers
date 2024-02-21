@@ -1,7 +1,7 @@
 /**
-* Mizzle - Technology and Corporate Bootstrap Theme
+* Create Numbers Ltd
 *
-* @author Webestica (https://www.webestica.com/)
+* @author Create Numbers Ltd (https://www.createnumbers.com/)
 * @version 1.0.0
 **/
 
