@@ -132,7 +132,7 @@
     <!-- Call checkout -->
     <script>
         document.addEventListener('DOMContentLoaded', function () {
-            fetch('/checkout')
+            fetch('/checkout.js')
                 .then(response => {
                     if (response.redirected) {
                         window.location.href = response.url;
