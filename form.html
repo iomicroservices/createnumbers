@@ -1,0 +1,39 @@
+<!-- Request Form Submission START -->
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        document.getElementById('requestForm').addEventListener('submit', async function (e) {
+            e.preventDefault(); // Prevent the default form submission
+
+            // Convert FormData to JSON
+            const formData = new FormData(this);
+            const json = JSON.stringify(Object.fromEntries(formData.entries()));
+
+            // Optional: Show a loading indicator
+            document.getElementById('requestForm').innerHTML = '<div class="spinner-border text-warning" role="status"><span class="visually-hidden">Loading...</span></div>';
+
+            try {
+                const response = await fetch('/api/submit', { // Make sure this endpoint matches your setup in Cloudflare Pages Functions
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: json,
+                });
+
+                if (!response.ok) throw new Error('Network response was not OK');
+
+                const result = await response.json();
+                // Replace the form with a success message
+                document.getElementById('formContainer').innerHTML = `
+	                <div class="card text-center bg-success text-white">
+	                    <div class="card-body">
+	                        <h5 class="card-title"><i class="bi bi-check-lg"></i> Success</h5>
+	                        <p class="card-text">${result.message}</p>
+	                    </div>
+	                </div>`;
+            } catch (error) {
+                console.error('Submission error:', error);
+                // Handle submission error (e.g., show an error message)
+            }
+        });
+    });
+</script>
+<!-- Request Form Submission END -->

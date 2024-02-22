@@ -103,7 +103,6 @@
 	<link rel="stylesheet" type="text/css" href="/assets/vendor/font-awesome/css/all.min.css">
 	<link rel="stylesheet" type="text/css" href="/assets/vendor/bootstrap-icons/bootstrap-icons.css">
 	<link rel="stylesheet" type="text/css" href="/assets/vendor/glightbox/css/glightbox.css">
-	<link rel="stylesheet" type="text/css" href="/assets/vendor/swiper/swiper-bundle.min.css">
 	
 	<!-- Theme CSS -->
 	<link rel="stylesheet" type="text/css" href="/assets/css/style.css">
@@ -113,14 +112,6 @@
 </head>
 
 <body>
-
-<!-- Component Functions -->
-<script>
-	// Load footer template
-	fetch('/components/footer.html')
-		.then(response => response.text())
-		.then(html => document.getElementById('footer').innerHTML = html);
-</script>
 
 <!-- Pre loader START -->
 <div class="preloader">
@@ -258,12 +249,19 @@ Footer END -->
 <script src="/assets/vendor/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
 
 <!--Vendors-->
-<script src="/assets/vendor/purecounterjs/dist/purecounter_vanilla.js"></script>
 <script src="/assets/vendor/glightbox/js/glightbox.js"></script>
 <script src="/assets/vendor/swiper/swiper-bundle.min.js"></script>
 
 <!-- Theme Functions -->
 <script src="/assets/js/functions.js"></script>
+
+<!-- Component Functions -->
+<script>
+	// Load footer template
+	fetch('/components/footer.html')
+		.then(response => response.text())
+		.then(html => document.getElementById('footer').innerHTML = html);
+</script>
 
 </body>
 </html>
