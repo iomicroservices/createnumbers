@@ -26,26 +26,28 @@ export async function onRequestGet({ request, env }) {
 
 
     try {
-        // Make the API call
-        const apiResponse = await fetch(outboundUrl.href, {
-            method: 'GET', // or 'POST', depending on your requirements
-        });
+        const apiResponse = await fetch(outboundUrl.href);
 
-        if (!apiResponse.ok) {
-            throw new Error('API call failed');
+        // Check if the API response wants to redirect
+        if (apiResponse.status === 302 || apiResponse.status === 301) {
+            // Get the URL to redirect to from the Location header
+            const location = apiResponse.headers.get('Location');
+            if (location) {
+                // Redirect the user to the URL provided by the API
+                return Response.redirect(location, 302);
+            } else {
+                throw new Error('Location header missing');
+            }
         }
 
-        // Process the API response
+        // If the response is not a redirect, process as normal
         const responseData = await apiResponse.json();
-        // TODO: Do something with responseData
 
-        // Return a success response or redirect based on your application logic
         return new Response(JSON.stringify(responseData), {
             headers: { 'Content-Type': 'application/json' },
         });
     } catch (error) {
-        console.error(error);
-        // Handle errors, potentially logging them or taking other actions
-        return Response.redirect(env.HOMEPAGE_URL);
+        console.error('Error:', error);
+        return Response.redirect(env.HOMEPAGE_URL, 302);
     }
 }
