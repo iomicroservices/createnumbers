@@ -48,6 +48,6 @@ export async function onRequestGet({ request, env }) {
         });
     } catch (error) {
         console.error('Error:', error);
-        return Response.redirect(env.HOMEPAGE_URL, 302);
+        return Response.redirect(`${ url.origin }`, 302);
     }
 }
