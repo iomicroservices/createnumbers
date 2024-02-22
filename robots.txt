@@ -3,7 +3,6 @@
 # Section for all robots
 User-agent: *
 Disallow: /assets/
-Disallow: /components/
 Disallow: /console/
 Disallow: /functions/
 
