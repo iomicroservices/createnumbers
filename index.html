@@ -178,27 +178,26 @@
 
 		gtag('config', 'G-DEXFC3C67M');
 	</script>
-	
-	<!-- Component Functions -->
-	<script>
-		// Load header template
-		fetch('/components/header.html')
-			.then(response => response.text())
-			.then(html => document.getElementById('nav-bar').innerHTML = html);
-		// Load faqs template
-		fetch('/components/faqs.html')
-			.then(response => response.text())
-			.then(html => document.getElementById('faqs').innerHTML = html);
-		// Load footer template
-		fetch('/components/footer.html')
-			.then(response => response.text())
-			.then(html => document.getElementById('footer').innerHTML = html);
-	</script>
-
 
 </head>
 
 <body>
+
+<!-- Component Functions -->
+<script>
+	// Load header template
+	fetch('/components/header.html')
+		.then(response => response.text())
+		.then(html => document.getElementById('nav-bar').innerHTML = html);
+	// Load faqs template
+	fetch('/components/faqs.html')
+		.then(response => response.text())
+		.then(html => document.getElementById('faqs').innerHTML = html);
+	// Load footer template
+	fetch('/components/footer.html')
+		.then(response => response.text())
+		.then(html => document.getElementById('footer').innerHTML = html);
+</script>
 
 <!-- Pre loader START -->
 <div class="preloader">
