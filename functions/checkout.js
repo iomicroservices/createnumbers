@@ -24,32 +24,27 @@ export async function onRequestGet({ request, env }) {
     outboundUrl.searchParams.set('delivery', 'SIM by post');
     outboundUrl.searchParams.set('website', url.href);
 
+
     try {
         const apiResponse = await fetch(outboundUrl.href, { redirect: 'manual' });
         const location = apiResponse.headers.get('Location');
 
         if (location) {
-            // Redirect to the URL provided by the external API
-            return Response.redirect(location, 302);
-        } else {
-            // Handle case where the external API does not provide a redirect
-            console.error('No redirect URL provided by the external API.');
-            return new Response('No redirect URL provided.', {
-                status: 400,
+            // Instead of redirecting server-side, send the URL back to the client
+            return new Response(JSON.stringify({ redirectUrl: location }), {
+                status: 200, // OK status
                 headers: {
-                    'Access-Control-Allow-Origin': '*',
-                    'Content-Type': 'application/json'
+                    'Content-Type': 'application/json',
+                    'Access-Control-Allow-Origin': '*', // Adjust CORS as needed
                 }
             });
+        } else {
+            // Handle case where no redirect URL is provided by the external API
+            console.error('No redirect URL provided by the external API.');
+            return new Response('No redirect URL provided.', { status: 400 });
         }
     } catch (error) {
         console.error('Error fetching the external API:', error);
-        return new Response('Internal Server Error', {
-            status: 500,
-            headers: {
-                'Access-Control-Allow-Origin': '*',
-                'Content-Type': 'application/json'
-            }
-        });
+        return new Response('Internal Server Error', { status: 500 });
     }
 }

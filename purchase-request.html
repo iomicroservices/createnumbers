@@ -134,16 +134,19 @@
             const ref = params.get('ref');
 
             fetch(`/checkout?number=${encodeURIComponent(number)}&ref=${encodeURIComponent(ref)}`)
-                .then(response => {
-                    if (response.redirected) {
-                        window.location.href = response.url;
+                .then(response => response.json()) // Parse the JSON response
+                .then(data => {
+                    if (data.redirectUrl) {
+                        // Use window.location.href to redirect the user
+                        window.location.href = data.redirectUrl;
                     } else {
-                        // Fallback or error handling
-                        console.error('Unexpected response');
+                        console.error('Redirect URL not received.');
+                        // Handle failure
                     }
                 })
                 .catch(error => console.error('Fetch error:', error));
         });
     </script>
+
 </body>
 </html>
