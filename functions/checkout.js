@@ -31,7 +31,7 @@ export async function onRequestGet(context) {
 
     try {
         // Fetch from the external API
-        const response = await fetch(outboundUrl, { redirect: 'manual' });
+        const response = await fetch(outboundUrl.href, { redirect: 'manual' });
         const location = response.headers.get('Location');
 
         if (location) {
