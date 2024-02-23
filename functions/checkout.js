@@ -3,6 +3,11 @@ export async function onRequestGet(context) {
     const url = new URL(request.url);
     const number = url.searchParams.get('number');
     const ref = url.searchParams.get('ref');
+    // Add CORS headers to the response
+    const headers = new Headers({
+        'Access-Control-Allow-Origin': '*', // Adjust this to be more restrictive if needed
+        'Access-Control-Allow-Methods': 'GET',
+        'Content-Type': 'application/json'
 
     // Validation
     if (!number || !ref) {
