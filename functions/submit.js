@@ -1,30 +1,24 @@
-export async function onRequest(context) {
-    // Extract the environment variables
-    const requestURL = context.env.REQUEST_URL;
-    const requestToken = context.env.REQUEST_TOKEN;
+// Cloudflare Pages Function: submit.js
+export async function onRequestPost(context) {
+    // Extracting the incoming request
+    const { request, env } = context;
+    const formData = await request.formData();
 
-    // Parse the incoming request body as JSON
-    const originalRequestBody = await context.request.json();
+    // Convert FormData to URLSearchParams for easy forwarding
+    const body = new URLSearchParams(formData);
 
-    // Add the authenticity_token to the request body
-    const modifiedRequestBody = {
-        ...originalRequestBody,
-        authenticity_token: requestToken,
-    };
+    // Forward the form data to the REQUEST_URL
+    const response = await fetch(env.REQUEST_URL, {
+        method: 'POST',
+        body: body,
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+        },
+    });
 
-    // Prepare the fetch options
-    const options = {
-        method: 'POST', // Adjust if your external API requires a different method
+    // Regardless of the response from REQUEST_URL, return a success message
+    return new Response(JSON.stringify({ message: "Form submitted successfully." }), {
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(modifiedRequestBody),
-    };
-
-    // Forward the modified request to the external URL
-    const response = await fetch(requestURL, options);
-
-    // Stream the response back to the client
-    return new Response(response.body, {
-        status: response.status,
-        headers: response.headers,
+        status: 200, // HTTP Status Code for OK
     });
 }
