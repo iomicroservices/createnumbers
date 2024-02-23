@@ -1,4 +1,4 @@
-export async function onRequestGet({ request, env }) {
+export async function onRequestGet(context) {
     // Parse the URL to get access to the query parameters
     const url = new URL(request.url);
     const number = url.searchParams.get('number');
@@ -16,7 +16,7 @@ export async function onRequestGet({ request, env }) {
     }
 
     // Construct the outbound API URL with query parameters
-    const outboundUrl = new URL(env.PURCHASE_URL);
+    const outboundUrl = new URL(context.env.PURCHASE_URL);
     outboundUrl.searchParams.set('customNumber', number);
     outboundUrl.searchParams.set('reference', ref);
     outboundUrl.searchParams.set('source', 'Create');
@@ -24,30 +24,21 @@ export async function onRequestGet({ request, env }) {
     outboundUrl.searchParams.set('delivery', 'SIM by post');
     outboundUrl.searchParams.set('website', url.href);
 
-
     try {
-        const apiResponse = await fetch(outboundUrl.href);
+        // Fetch from the external API
+        const response = await fetch(outboundUrl, { redirect: 'manual' });
+        const location = response.headers.get('Location');
 
-        // Check if the API response wants to redirect
-        if (apiResponse.status === 302 || apiResponse.status === 301) {
-            // Get the URL to redirect to from the Location header
-            const location = apiResponse.headers.get('Location');
-            if (location) {
-                // Redirect the user to the URL provided by the API
-                return Response.redirect(location, 302);
-            } else {
-                throw new Error('Location header missing');
-            }
+        if (location) {
+            // Redirect to the URL provided by the external API
+            return Response.redirect(location, 302);
+        } else {
+            // Handle case where the external API does not provide a redirect
+            console.error('No redirect URL provided by the external API.');
+            return new Response('No redirect URL provided.', { status: 400 });
         }
-
-        // If the response is not a redirect, process as normal
-        const responseData = await apiResponse.json();
-
-        return new Response(JSON.stringify(responseData), {
-            headers: { 'Content-Type': 'application/json' },
-        });
     } catch (error) {
-        console.error('Error:', error);
-        return Response.redirect(`${ url.origin }/`, 302);
+        console.error('Error fetching the external API:', error);
+        return new Response('Internal Server Error', { status: 500 });
     }
 }

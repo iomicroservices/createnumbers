@@ -128,19 +128,24 @@
 
     <!-- Call checkout -->
     <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            fetch('/checkout.js')
+        document.addEventListener('DOMContentLoaded', () => {
+            const params = new URLSearchParams(window.location.search);
+            const number = params.get('number');
+            const ref = params.get('ref');
+
+            fetch(`/api/checkout?number=${encodeURIComponent(number)}&ref=${encodeURIComponent(ref)}`)
                 .then(response => {
                     if (response.redirected) {
                         window.location.href = response.url;
                     } else {
-                        console.error('Failed to get checkout link');
-                        // Handle failure
+                        // Fallback or error handling
+                        console.error('Unexpected response');
                     }
                 })
-                .catch(error => console.error('Error:', error));
+                .catch(error => console.error('Fetch error:', error));
         });
     </script>
+
 
 
 </body>
