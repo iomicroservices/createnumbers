@@ -308,7 +308,7 @@ Footer END -->
 
 				fetch('/activation', {
 					method: 'POST',
-					body: new FormData(this),
+					body: new formData(this),
 				})
 					.then(response => {
 						// Regardless of the actual JSON response, show the success message
