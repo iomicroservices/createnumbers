@@ -414,7 +414,7 @@ Request form START -->
 						<input type="hidden" name="authenticity_token" id="authenticity_token" value="XYZ">
 
 						<!-- Button -->
-						<button class="btn btn-lg btn-warning mb-0" type="submit">Create my number</button>
+						<button id="submitRequest" class="btn btn-lg btn-warning mb-0" type="submit">Create my number</button>
 					</form>
 
 					<!-- Success message once form submitted -->
@@ -1410,7 +1410,7 @@ Footer END -->
 			}
 
 			if (isValid) {
-				$("button[type='submit']").prop('disabled', true).text("Processing...");
+				$("#submitRequest").prop('disabled', true).text("Processing...");
 
 				fetch('/submit', {
 					method: 'POST',
@@ -1426,12 +1426,12 @@ Footer END -->
 							// You can handle HTTP error statuses here
 							console.error('Submission failed');
 						}
-						$("button[type='submit']").prop('disabled', false).text("Create my number");
+						$("#submitRequest").prop('disabled', false).text("Create my number");
 					})
 					.catch(error => {
 						// Handle network errors
 						console.error('Error:', error);
-						$("button[type='submit']").prop('disabled', false).text("Create my number");
+						$("#submitRequest").prop('disabled', false).text("Create my number");
 					});
 			}
 		});
