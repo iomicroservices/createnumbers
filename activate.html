@@ -212,12 +212,14 @@ Activation & form START -->
 					<form id="activationForm" class="row g-4">
 						<div class="col-md-6">
 							<label class="form-label heading-color">Activation code *</label>
-							<input id="code" type="text" class="form-control form-control-lg" placeholder="On your giffgaff SIM">
+							<input id="code" type="text" class="form-control form-control-lg" placeholder="On your giffgaff SIM" required  oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');" maxlength="6">
+							<span id="codeError" class="error"></span>
 						</div>
 			
 						<div class="col-md-6">
 							<label class="form-label heading-color">Email address *</label>
 							<input id="email" type="email" class="form-control form-control-lg" placeholder="Must be your order email">
+							<span id="emailError" class="error"></span>
 						</div>				
 						<!-- Button -->
 						<button id="submitCode" class="btn btn-lg btn-warning mb-0">Submit</button>
@@ -294,7 +296,7 @@ Footer END -->
 			}
 
 			// Activation code validation
-			if (request.length < 6) {
+			if (code.length < 6) {
 				$("#codeError").text("Must contain at least 6 characters");
 				isValid = false;
 			}
