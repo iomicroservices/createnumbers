@@ -498,9 +498,6 @@ Request form START -->
 							<input type="text" name="request" id="request" required class="form-control form-control-lg" placeholder="Enter last 6 or 7 digits" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');" maxlength="7">
 							<span id="requestError" class="error"></span>
 						</div>
-						
-						<input type="hidden" name="source" id="source" value="Create">
-						<input type="hidden" name="authenticity_token" id="authenticity_token" value="XYZ">
 
 						<!-- Button -->
 						<button id="submitRequest" class="btn btn-lg btn-warning mb-0" type="submit">Create my number</button>
