@@ -171,7 +171,7 @@ Main Banner START -->
 			<div class="col-lg-8">
 				<!-- Title -->
 				<h1 class="mb-0 lh-base">Let's activate your shiny new SIM !</h1>
-				<p class="mb-0 mt-4">Supposing so be resolving breakfast am or perfectly. It drew a hill from me. Valley by oh twenty direct me so. Departure defective arranging rapturous did believe him all had supported.</p>
+				<p class="mb-0 mt-4">Get connected in an instant. Submit the activation code printed on your SIM to get started. Check your email once submitted for more information.</p>
 			</div>
 			<!-- Hero content END -->
 
@@ -194,7 +194,7 @@ Main Banner END -->
 
 <!-- =======================
 Activation & form START -->
-<section id="activationForm" class="pt-4 pb-0 mt-n8">
+<section class="pt-4 pb-0 mt-n8">
 	<div class="container">
 		<div class="row">
 			<!-- Quote -->
@@ -207,22 +207,30 @@ Activation & form START -->
 			<!-- Activation form -->
 			<div class="col-lg-8 position-relative ms-auto ps-xl-6 mt-6">
 				<!-- Card -->
-				<div class="card card-body shadow border p-sm-5">
+				<div id="formContainer" class="card card-body shadow border p-sm-5">
 			
-					<form class="row g-4">
+					<form id="activationForm" class="row g-4">
 						<div class="col-md-6">
 							<label class="form-label heading-color">Activation code *</label>
-							<input type="text" class="form-control form-control-lg" placeholder="On your giffgaff SIM">
+							<input id="code" type="text" class="form-control form-control-lg" placeholder="On your giffgaff SIM">
 						</div>
 			
 						<div class="col-md-6">
 							<label class="form-label heading-color">Email address *</label>
-							<input type="email" class="form-control form-control-lg" id="floatingInput"
-								placeholder="Must be your order email">
+							<input id="email" type="email" class="form-control form-control-lg" placeholder="Must be your order email">
 						</div>				
 						<!-- Button -->
-						<button class="btn btn-lg btn-warning mb-0">Submit</button>
+						<button id="submitCode" class="btn btn-lg btn-warning mb-0">Submit</button>
 					</form>
+
+					<!-- Success message once form submitted -->
+					<div id="successCover"
+						class="position-absolute top-0 start-0 w-100 h-100 d-flex flex-column justify-content-center align-items-center text-center rounded-3 px-3 bg-dark d-none">
+						<i class="bi bi-check-circle-fill text-success" style="font-size: 48px;"></i>
+						<p class="mt-3 text-light">Thank you - please check your email for more info.
+						</p>
+						<button id="submitAnother" class="btn btn-warning">Make another submission</button>
+					</div>
 
 				</div>
 			</div>
@@ -231,6 +239,7 @@ Activation & form START -->
 </section>
 <!-- =======================
 Activation & form END -->
+
 
 </main>
 <!-- **************** MAIN CONTENT END **************** -->
@@ -262,6 +271,68 @@ Footer END -->
 		.then(response => response.text())
 		.then(html => document.getElementById('footer').innerHTML = html);
 </script>
+
+<!-- Form validation and submission START -->
+<script>
+	$(document).ready(function () {
+		$("#activationForm").submit(function (e) {
+			e.preventDefault(); // Always prevent the default submission to handle it via JavaScript
+
+			var email = $("#email").val();
+			var emailReg = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/;
+			var code = $("#code").val();
+			var isValid = true;
+
+			// Reset error messages
+			$("#emailError").text("");
+			$("#codeError").text("");
+
+			// Email validation
+			if (!emailReg.test(email)) {
+				$("#emailError").text("Invalid Email");
+				isValid = false;
+			}
+
+			// Activation code validation
+			if (request.length < 6) {
+				$("#codeError").text("Must contain at least 6 characters");
+				isValid = false;
+			}
+
+			if (isValid) {
+				$("#submitCode").prop('disabled', true).text("Processing...");
+
+				fetch('/activation', {
+					method: 'POST',
+					body: new FormData(this),
+				})
+					.then(response => {
+						// Regardless of the actual JSON response, show the success message
+						if (response.ok) {
+							// HTTP response status 200-299 indicates success
+							$('#formContainer').addClass('position-relative');
+							$('#successCover').removeClass('d-none'); // Unhide the success message
+						} else {
+							// You can handle HTTP error statuses here
+							console.error('Submission failed');
+						}
+						$("#submitCode").prop('disabled', false).text("Activate my number");
+					})
+					.catch(error => {
+						// Handle network errors
+						console.error('Error:', error);
+						$("#submitCode").prop('disabled', false).text("Activate my number");
+					});
+			}
+		});
+
+		$('#submitAnother').click(function () {
+			$('#successCover').addClass('d-none'); // Hide the success message
+			$('#activationForm').trigger("reset"); // Reset the form for another submission
+		});
+	});
+</script>
+<!-- Form validation and submission end -->
 
 </body>
 </html>
