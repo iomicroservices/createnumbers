@@ -133,7 +133,7 @@
             const number = params.get('number');
             const ref = params.get('ref');
 
-            fetch(`/api/checkout?number=${encodeURIComponent(number)}&ref=${encodeURIComponent(ref)}`)
+            fetch(`/checkout?number=${encodeURIComponent(number)}&ref=${encodeURIComponent(ref)}`)
                 .then(response => {
                     if (response.redirected) {
                         window.location.href = response.url;
@@ -145,9 +145,5 @@
                 .catch(error => console.error('Fetch error:', error));
         });
     </script>
-
-
-
 </body>
-
 </html>
