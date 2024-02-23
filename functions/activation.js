@@ -1,37 +1,36 @@
 export async function onRequestPost(context) {
+    // Extracting the incoming request
     const { request, env } = context;
 
+    // Check the Origin header of the request
     const origin = request.headers.get("Origin");
-    const allowedOriginsArray = ["https://createnumbers.com", "https://www.createnumbers.com", "https://createnumbers.co.uk", "https://www.createnumbers.co.uk"];
+    const allowedOrigins = "https://createnumbers.com, https://www.createnumbers.com, https://createnumbers.co.uk, https://www.createnumbers.co.uk";
 
-    // Adjusted to handle array of origins
-    if (!allowedOriginsArray.includes(origin)) {
+    // Return an error response if the origin is not as expected
+    if (!allowedOrigins.includes(origin)) {
         return new Response("Unauthorized request", { status: 403 });
     }
 
     const formData = await request.formData();
 
-    // Convert FormData to a JSON object
-    const data = {};
-    for (const [key, value] of formData.entries()) {
-        data[key] = value;
-    }
+    // Append additional fields to formData
+    formData.append('source', 'Create');
 
-    // Append additional fields to the data object
-    data['source'] = 'Create';
+    // Convert FormData to URLSearchParams for easy forwarding
+    const body = new URLSearchParams(formData);
 
-    // Forward the form data to the REQUEST_URL as JSON
+    // Forward the form data to the REQUEST_URL
     const response = await fetch(env.ACTIVATION_URL, {
         method: 'POST',
+        body: body,
         headers: {
-            'Content-Type': 'application/json',
+            'Content-Type': 'application/x-www-form-urlencoded',
         },
-        body: JSON.stringify(data), // Send data as JSON
     });
 
     // Regardless of the response from REQUEST_URL, return a success message
     return new Response(JSON.stringify({ message: "Form submitted successfully." }), {
         headers: { 'Content-Type': 'application/json' },
-        status: 200,
+        status: 200, // HTTP Status Code for OK
     });
 }
