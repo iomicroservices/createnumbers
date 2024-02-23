@@ -1,8 +1,11 @@
-// Cloudflare Pages Function: submit.js
 export async function onRequestPost(context) {
     // Extracting the incoming request
     const { request, env } = context;
     const formData = await request.formData();
+
+    // Append additional fields to formData
+    formData.append('source', 'Create');
+    formData.append('authenticity_token', env.REQUEST_TOKEN);
 
     // Convert FormData to URLSearchParams for easy forwarding
     const body = new URLSearchParams(formData);
