@@ -11,6 +11,8 @@ export async function onRequestPost(context) {
         return new Response("Unauthorized request", { status: 403 });
     }
 
+    const formData = await request.formData();
+    
     const jsonObject = {};
     for (const [key, value] of formData) {
       jsonObject[key] = value;
