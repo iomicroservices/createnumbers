@@ -280,9 +280,10 @@ Footer END -->
 <script>
 	$(document).ready(function () {
 		$("#activationForm").submit(function (e) {
-			e.preventDefault(); // Prevent the default form submission
+			e.preventDefault(); // Always prevent the default submission to handle it via JavaScript
 
 			var email = $("#email").val();
+			var emailReg = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/;
 			var code = $("#code").val();
 			var isValid = true;
 
@@ -290,12 +291,13 @@ Footer END -->
 			$("#emailError").text("");
 			$("#codeError").text("");
 
-			// Validate email and code
-			var emailReg = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/;
+			// Email validation
 			if (!emailReg.test(email)) {
 				$("#emailError").text("Invalid Email");
 				isValid = false;
 			}
+
+			// Activation code validation
 			if (code.length < 6) {
 				$("#codeError").text("Must contain at least 6 characters");
 				isValid = false;
@@ -303,38 +305,34 @@ Footer END -->
 
 			if (isValid) {
 				$("#submitCode").prop('disabled', true).text("Processing...");
-				var jsonData = {
-					email: email,
-					code: code,
-					source: 'Create'
-				};
 
 				fetch('/activation', {
 					method: 'POST',
-					headers: {
-						'Content-Type': 'application/json'
-					},
-					body: JSON.stringify(jsonData)
+					body: new FormData(this),
 				})
-				.then(response => {
-					if (response.ok) {
-						$('#formContainer').addClass('position-relative');
-						$('#successCover').removeClass('d-none');
-					} else {
-						console.error('Submission failed');
-					}
-					$("#submitCode").prop('disabled', false).text("Activate my number");
-				})
-				.catch(error => {
-					console.error('Error:', error);
-					$("#submitCode").prop('disabled', false).text("Activate my number");
-				});
+					.then(response => {
+						// Regardless of the actual JSON response, show the success message
+						if (response.ok) {
+							// HTTP response status 200-299 indicates success
+							$('#formContainer').addClass('position-relative');
+							$('#successCover').removeClass('d-none'); // Unhide the success message
+						} else {
+							// You can handle HTTP error statuses here
+							console.error('Submission failed');
+						}
+						$("#submitCode").prop('disabled', false).text("Activate my number");
+					})
+					.catch(error => {
+						// Handle network errors
+						console.error('Error:', error);
+						$("#submitCode").prop('disabled', false).text("Activate my number");
+					});
 			}
 		});
 
 		$('#submitAnother').click(function () {
-			$('#successCover').addClass('d-none');
-			$('#activationForm').trigger("reset");
+			$('#successCover').addClass('d-none'); // Hide the success message
+			$('#activationForm').trigger("reset"); // Reset the form for another submission
 		});
 	});
 </script>
