@@ -12,22 +12,19 @@ export async function onRequestPost(context) {
     }
 
     const formData = await request.formData();
-    
+
     // Append additional fields to formData
     formData.append('source', 'Create');
 
-    // Convert FormData to json for easy forwarding
-    const jsonObject = {};
-    for (const [key, value] of formData) {
-      jsonObject[key] = value;
-    }
+    // Convert FormData to URLSearchParams for easy forwarding
+    const body = new URLSearchParams(formData);
 
     // Forward the form data to the REQUEST_URL
     const response = await fetch(env.ACTIVATION_URL, {
         method: 'POST',
-        body: JSON.stringify(jsonObject),
+        body: body,
         headers: {
-            'Content-Type': 'application/json',
+            'Content-Type': 'application/x-www-form-urlencoded',
         },
     });
 
