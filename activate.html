@@ -306,9 +306,19 @@ Footer END -->
 			if (isValid) {
 				$("#submitCode").prop('disabled', true).text("Processing...");
 
+				// Create a JSON object from the form data
+				const formData = {
+					email: email,
+					code: code,
+					source: 'Create'  // Adding the 'source' field directly to the JSON object
+				};
+
 				fetch('/activation', {
 					method: 'POST',
-					body: new FormData(this),
+					headers: {
+						'Content-Type': 'application/json'  // Set Content-Type to application/json
+					},
+					body: JSON.stringify(formData),  // Convert the JSON object to a string
 				})
 					.then(response => {
 						// Regardless of the actual JSON response, show the success message
