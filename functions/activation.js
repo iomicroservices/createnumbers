@@ -13,13 +13,13 @@ export async function onRequestPost(context) {
 
     const formData = await request.formData();
     
+    // Append additional fields to formData
+    formData.append('source', 'Create');
+    
     const jsonObject = {};
     for (const [key, value] of formData) {
       jsonObject[key] = value;
     }
-
-    // Append additional fields to the JSON object
-    jsonObject['source'] = 'Create';
 
     // Forward the form data to the REQUEST_URL
     const response = await fetch(env.ACTIVATION_URL, {
