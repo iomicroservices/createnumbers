@@ -11,20 +11,18 @@ export async function onRequestPost(context) {
         return new Response("Unauthorized request", { status: 403 });
     }
 
+    // Convert the FormData to a JSON object
     const formData = await request.formData();
+    const json = {};
+    formData.forEach((value, key) => { json[key] = value; });
+    json['source'] = 'Create'; // Append the additional field
 
-    // Append additional fields to formData
-    formData.append('source', 'Create');
-
-    // Convert FormData to URLSearchParams for easy forwarding
-    const body = new URLSearchParams(formData);
-
-    // Forward the form data to the REQUEST_URL
+    // Forward the form data as JSON to the REQUEST_URL
     const response = await fetch(env.ACTIVATION_URL, {
         method: 'POST',
-        body: body,
+        body: JSON.stringify(json), // Convert the JSON object to a string
         headers: {
-            'Content-Type': 'application/x-www-form-urlencoded',
+            'Content-Type': 'application/json', // Set Content-Type to application/json
         },
     });
 
