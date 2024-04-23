@@ -15,7 +15,8 @@ export async function onRequestPost(context) {
     
     // Append additional fields to formData
     formData.append('source', 'Create');
-    
+
+    // Convert FormData to json for easy forwarding
     const jsonObject = {};
     for (const [key, value] of formData) {
       jsonObject[key] = value;
