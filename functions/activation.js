@@ -1,48 +1,36 @@
 export async function onRequestPost(context) {
+    // Extracting the incoming request
     const { request, env } = context;
 
+    // Check the Origin header of the request
     const origin = request.headers.get("Origin");
     const allowedOrigins = "https://createnumbers.com, https://www.createnumbers.com, https://createnumbers.co.uk, https://www.createnumbers.co.uk";
 
+    // Return an error response if the origin is not as expected
     if (!allowedOrigins.includes(origin)) {
         return new Response("Unauthorized request", { status: 403 });
     }
 
-    // Assuming the body is JSON
-    const data = await request.json();
+    const formData = await request.formData();
 
-    // Prepare data for Airtable
-    const airtableData = {
-        "records": [
-            {
-                "fields": {
-                    "Email": data.email,
-                    "Code": data.code,
-                    "Source": data.source
-                }
-            }
-        ]
-    };
+    // Append additional fields to formData
+    formData.append('source', 'Create');
 
-    const airtableResponse = await fetch(env.AIRTABLE_URL, {
+    // Convert FormData to URLSearchParams for easy forwarding
+    const body = new URLSearchParams(formData);
+
+    // Forward the form data to the REQUEST_URL
+    const response = await fetch(env.ACTIVATION_URL, {
         method: 'POST',
+        body: body,
         headers: {
-            'Authorization': `Bearer ${env.AIRTABLE_API_KEY}`,
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/x-www-form-urlencoded',
         },
-        body: JSON.stringify(airtableData)
     });
 
-    if (!airtableResponse.ok) {
-        return new Response("Failed to post data to Airtable", {
-            status: 500,
-            headers: { 'Content-Type': 'application/json' }
-        });
-    }
-
-    // Return success message
+    // Regardless of the response from REQUEST_URL, return a success message
     return new Response(JSON.stringify({ message: "Form submitted successfully." }), {
         headers: { 'Content-Type': 'application/json' },
-        status: 200
+        status: 200, // HTTP Status Code for OK
     });
 }
