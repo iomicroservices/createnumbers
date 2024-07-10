@@ -306,7 +306,7 @@ Footer END -->
 			if (isValid) {
 				$("#submitCode").prop('disabled', true).text("Processing...");
 
-				fetch('${env.ACTIVATION_URL}', {
+				fetch('/activation', {
 					method: 'POST',
 					body: new FormData(this),
 				})
