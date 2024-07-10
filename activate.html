@@ -108,6 +108,8 @@
 	<link rel="stylesheet" type="text/css" href="/assets/css/style.css">
 	<link rel="stylesheet" type="text/css" href="/assets/css/color.css">
 
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
 
 </head>
 
@@ -278,63 +280,55 @@ Footer END -->
 
 <!-- Form validation and submission START -->
 <script>
-	$(document).ready(function () {
-		$("#activationForm").submit(function (e) {
-			e.preventDefault(); // Always prevent the default submission to handle it via JavaScript
+    $(document).ready(function() {
+        $("#activationForm").submit(function(e) {
+            e.preventDefault();
 
-			var email = $("#email").val();
-			var emailReg = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/;
-			var code = $("#code").val();
-			var isValid = true;
+            var email = $("#email").val();
+            var emailReg = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/;
+            var code = $("#code").val();
+            var isValid = true;
 
-			// Reset error messages
-			$("#emailError").text("");
-			$("#codeError").text("");
+            // Reset error messages
+            $("#emailError").text("");
+            $("#codeError").text("");
 
-			// Email validation
-			if (!emailReg.test(email)) {
-				$("#emailError").text("Invalid Email");
-				isValid = false;
-			}
+            // Email validation
+            if (!emailReg.test(email)) {
+                $("#emailError").text("Invalid Email");
+                isValid = false;
+            }
 
-			// Activation code validation
-			if (code.length < 6) {
-				$("#codeError").text("Must contain at least 6 characters");
-				isValid = false;
-			}
+            // Activation code validation
+            if (code.length < 6) {
+                $("#codeError").text("Activation code must contain at least 6 characters");
+                isValid = false;
+            }
 
-			if (isValid) {
-				$("#submitCode").prop('disabled', true).text("Processing...");
+            if (isValid) {
+                $("#submitCode").prop('disabled', true).text("Processing...");
 
-				fetch('${env.ACTIVATION_URL}', {
-					method: 'POST',
-					body: new FormData(this),
-				})
-					.then(response => {
-						// Regardless of the actual JSON response, show the success message
-						if (response.ok) {
-							// HTTP response status 200-299 indicates success
-							$('#formContainer').addClass('position-relative');
-							$('#successCover').removeClass('d-none'); // Unhide the success message
-						} else {
-							// You can handle HTTP error statuses here
-							console.error('Submission failed');
-						}
-						$("#submitCode").prop('disabled', false).text("Activate my number");
-					})
-					.catch(error => {
-						// Handle network errors
-						console.error('Error:', error);
-						$("#submitCode").prop('disabled', false).text("Activate my number");
-					});
-			}
-		});
+                $.ajax({
+                    type: "POST",
+                    url: "https://hook.eu1.make.com/pp531mptxeu7qaxoyjrvn3wphjbd9cvz",
+                    data: $("#activationForm").serialize(),
+                    success: function(response) {
+                        $("#formContainer").addClass('position-relative');
+                        $("#successCover").removeClass('d-none');
+                    },
+                    error: function(xhr, status, error) {
+                        console.error('Submission failed:', error);
+                        $("#submitCode").prop('disabled', false).text("Submit");
+                    }
+                });
+            }
+        });
 
-		$('#submitAnother').click(function () {
-			$('#successCover').addClass('d-none'); // Hide the success message
-			$('#activationForm').trigger("reset"); // Reset the form for another submission
-		});
-	});
+        $('#submitAnother').click(function () {
+            $('#successCover').addClass('d-none');
+            $('#activationForm')[0].reset();
+        });
+    });
 </script>
 
 <!-- Form validation and submission end -->
