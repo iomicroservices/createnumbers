@@ -212,7 +212,7 @@ Activation & form START -->
 					<form id="activationForm" class="row g-4">
 						<div class="col-md-6">
 							<label class="form-label heading-color">Activation code *</label>
-							<input id="code" type="text" class="form-control form-control-lg" placeholder="On your giffgaff SIM" required  oninput="this.value = this.value.replace(/[^a-zA-Z0-9]/g, '');" maxlength="6">
+							<input id="code" type="text" class="form-control form-control-lg" placeholder="On your giffgaff SIM" required  oninput="this.value = this.value.replace(/[^a-zA-Z0-9]/g, '');" maxlength="13">
 							<span id="codeError" class="error"></span>
 						</div>
 			
@@ -306,7 +306,7 @@ Footer END -->
 			if (isValid) {
 				$("#submitCode").prop('disabled', true).text("Processing...");
 
-				fetch('/activation', {
+				fetch('${env.ACTIVATION_URL}', {
 					method: 'POST',
 					body: new FormData(this),
 				})
